@@ -8,27 +8,25 @@ namespace Mongolab.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ExperimentController : ControllerBase
+    public class TemplateController : ControllerBase
     {
-        private readonly ExperimentService _exptSvc;
-        public ExperimentController(ExperimentService exptSvc)
+        private readonly ExperimentTemplateService _exptTmpSvc;
+        public TemplateController(ExperimentTemplateService exptTmpSvc)
         {
-            _exptSvc = exptSvc;
+            _exptTmpSvc = exptTmpSvc;
         }
-
-
         [HttpGet]
         public List<Experiment> Get()
         {
-            return _exptSvc.Get();
+            return _exptTmpSvc.Get();
         }
 
         [HttpGet("{id}")]
         public ActionResult<Experiment> Get(string id)
         {
-            var expt = _exptSvc.Get(id);
-            if (expt != null)
-                return expt;
+            var tmp = _exptTmpSvc.Get(id);
+            if (tmp != null)
+                return tmp;
             else
                 return NotFound();
         }
@@ -36,14 +34,14 @@ namespace Mongolab.Controllers
         [HttpPost]
         public ActionResult<Experiment> Insert(Experiment expt)
         {
-            _exptSvc.Insert(expt);
+            _exptTmpSvc.Insert(expt);
             return Ok(expt);
         }
 
         [HttpDelete("{id}")]
         public ActionResult<Experiment> Delete(string id)
         {
-            _exptSvc.Delete(id);
+            _exptTmpSvc.Delete(id);
             return NoContent();
         }
     }
