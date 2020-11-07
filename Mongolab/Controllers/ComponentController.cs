@@ -36,8 +36,15 @@ namespace Mongolab.Controllers
         [HttpPost]
         public ActionResult<Component> Insert(Component cmpt)
         {
-            _cmptSvc.Insert(cmpt);
-            return Ok(cmpt.Id);
+            try
+            {
+                _cmptSvc.Insert(cmpt);
+                return Ok(cmpt);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         [HttpDelete("{id}")]
