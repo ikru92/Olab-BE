@@ -87,6 +87,7 @@ StyleCopReport.xml
 *.pidb
 *.svclog
 *.scc
+Mongolab/*.json
 
 # Chutzpah Test files
 _Chutzpah*
