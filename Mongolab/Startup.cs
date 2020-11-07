@@ -19,10 +19,21 @@ namespace Mongolab
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                    });
+            });
             services.AddScoped<ExperimentService>();
             services.AddScoped<ComponentService>();
             services.AddScoped<ExperimentTemplateService>();
             services.AddControllers();
+
 
         }
 
@@ -35,6 +46,7 @@ namespace Mongolab
             }
 
             app.UseRouting();
+            app.UseCors();
 
             app.UseAuthorization();
 
